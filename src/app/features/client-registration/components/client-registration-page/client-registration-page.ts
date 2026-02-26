@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
 import { ClientRegistrationStepDetails } from './steps/client-registration-step-details/client-registration-step-details';
 import { ClientRegistrationStepConsents } from './steps/client-registration-step-consents/client-registration-step-consents';
+import { ClientRegistrationForm } from '../../services/client-registration-form';
 
 @Component({
   selector: 'app-client-registration-page',
@@ -19,7 +20,22 @@ import { ClientRegistrationStepConsents } from './steps/client-registration-step
   },
 })
 export class ClientRegistrationPage {
-  protected save() {
+  private readonly clientRegistrationForm: ClientRegistrationForm = inject(ClientRegistrationForm);
+  protected readonly form = this.clientRegistrationForm.form;
+  protected currentStep: number = 1;
+
+  protected onSave() {
     console.log('saved');
+  }
+
+  protected validateFormAndMoveToNextStep(): void {
+    this.clientRegistrationForm.validateForm();
+    if (this.form.valid) {
+      this.currentStep = 2;
+    }
+  }
+
+  private validateConsents() {
+    //todo
   }
 }

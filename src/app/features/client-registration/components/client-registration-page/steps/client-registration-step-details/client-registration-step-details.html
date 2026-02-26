@@ -1,1 +1,31 @@
-<p>client-registration-step-details works!</p>
+<div class="card flex justify-center">
+  @let formGroup = form();
+  <form [formGroup]="formGroup">
+    <label for="type">Typ klienta:</label>
+    <p-select id="type" formControlName="type" [options]="[ClientType.PERSON, ClientType.COMPANY]" placeholder="Select type"
+              class="w-full md:w-56"/>
+    @if (formGroup.controls['type'].value === ClientType.PERSON) {
+      <p-floatlabel variant="on">
+        <input formControlName="name" pInputText id="name" autocomplete="off"/>
+        <label for="name">Imię</label>
+      </p-floatlabel>
+      <p-floatlabel variant="on">
+        <input formControlName="surname" pInputText id="surname" autocomplete="off"/>
+        <label for="surname">Nazwisko</label>
+      </p-floatlabel>
+    } @else {
+      <p-floatlabel variant="on">
+        <input formControlName="companyName" pInputText id="companyName" autocomplete="off"/>
+        <label for="companyName">Nazwa firmy</label>
+      </p-floatlabel>
+      <p-floatlabel variant="on">
+        <input formControlName="nip" pInputText id="nip" autocomplete="off"/>
+        <label for="nip">NIP</label>
+      </p-floatlabel>
+    }
+    <p-floatlabel variant="on">
+      <input formControlName="email" pInputText id="email" autocomplete="off"/>
+      <label for="email">Email</label>
+    </p-floatlabel>
+  </form>
+</div>
