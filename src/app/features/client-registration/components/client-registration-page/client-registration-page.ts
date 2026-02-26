@@ -22,7 +22,7 @@ import { ClientRegistrationForm } from '../../services/client-registration-form'
 export class ClientRegistrationPage {
   private readonly clientRegistrationForm: ClientRegistrationForm = inject(ClientRegistrationForm);
   protected readonly form = this.clientRegistrationForm.form;
-  protected currentStep: number = 1;
+  protected currentStep: number = 2;
 
   protected onSave() {
     console.log('saved');

@@ -1,1 +1,9 @@
-<p>client-registration-step-consents works!</p>
+@let consents = consents$ | async;
+@if (consents) {
+  @for (consent of consents; track consent.id) {
+    {{ consent.title }}
+  }
+} @else {
+  <p-progressSpinner style="transform: scale(0.6)"></p-progressSpinner>
+}
+

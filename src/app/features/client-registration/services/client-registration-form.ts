@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { ConsentDto } from '../models/consent-dto';
 
 export enum ClientType {
   PERSON = 'Person',
@@ -13,6 +14,7 @@ export type ClientRegistrationFormGroup = FormGroup<{
   companyName: FormControl<string | null>;
   nip: FormControl<string | null>;
   email: FormControl<string | null>;
+  consents: FormArray<FormControl<boolean | null>>;
 }>;
 
 @Injectable({
@@ -26,6 +28,7 @@ export class ClientRegistrationForm {
     companyName: new FormControl<string | null>(''),
     nip: new FormControl<string | null>(''),
     email: new FormControl<string | null>('', [Validators.required, Validators.email]),
+    consents: new FormArray<FormControl<boolean | null>>([]),
   });
 
   validateForm() {
@@ -57,5 +60,21 @@ export class ClientRegistrationForm {
 
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
+  }
+
+  buildConsentsFromDto(consents: ConsentDto[]) {
+    const consentsFormArray = this.form.get('consents') as FormArray<FormControl<boolean | null>>;
+    consents.forEach((consent: ConsentDto) => {
+      consentsFormArray.push(this.buildConsentControlFromConsentDto(consent));
+    });
+  }
+
+  private buildConsentControlFromConsentDto(consent: ConsentDto): FormControl<boolean | null> {
+    const validators: ValidatorFn[] = [];
+    if (consent.required) {
+      validators.push(Validators.required);
+    }
+
+    return new FormControl<boolean | null>(false, validators);
   }
 }
