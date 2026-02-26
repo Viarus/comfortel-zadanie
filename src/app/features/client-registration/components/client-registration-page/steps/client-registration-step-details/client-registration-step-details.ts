@@ -7,10 +7,18 @@ import { SelectModule } from 'primeng/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
+import { FormError } from '../../../../../../shared/form-error/form-error';
 
 @Component({
   selector: 'app-client-registration-step-details',
-  imports: [SelectModule, FormsModule, FloatLabelModule, InputTextModule, ReactiveFormsModule],
+  imports: [
+    SelectModule,
+    FormsModule,
+    FloatLabelModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    FormError,
+  ],
   templateUrl: './client-registration-step-details.html',
   styleUrl: './client-registration-step-details.css',
 })
