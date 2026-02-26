@@ -1,7 +1,27 @@
 @let consents = consents$ | async;
 @if (consents) {
-  @for (consent of consents; track consent.id) {
-    {{ consent.title }}
+  @let detailsStepFormGroup = form().controls['consentsStep'];
+  @if (detailsStepFormGroup) {
+    <div [formGroup]="detailsStepFormGroup">
+      <div formArrayName="consents" class="card flex justify-center">
+        <div class="flex flex-col gap-4">
+          @for (consent of consents; track $index) {
+            @let controlId = 'consent-checkbox-' + consent.id;
+            <div class="flex flex-col mb-2">
+              <div class="flex items-center text-xl mb-1">
+                <p-checkbox [inputId]="controlId" [binary]="true" [formControlName]="$index"/>
+                <label [for]="controlId" class="ml-2">
+                  {{ consent.title }}
+                  @if (consent.required) {*}
+                </label>
+              </div>
+              <p class="text-sm">{{consent.description}}</p>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
   }
 } @else {
   <p-progressSpinner style="transform: scale(0.6)"></p-progressSpinner>

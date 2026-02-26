@@ -9,10 +9,12 @@ import {
   ClientRegistrationForm,
   ClientRegistrationFormGroup,
 } from '../../../../services/client-registration-form';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-client-registration-step-consents',
-  imports: [AsyncPipe, ProgressSpinnerModule],
+  imports: [AsyncPipe, ProgressSpinnerModule, ReactiveFormsModule, CheckboxModule],
   templateUrl: './client-registration-step-consents.html',
   styleUrl: './client-registration-step-consents.css',
 })

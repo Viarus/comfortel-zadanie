@@ -1,37 +1,39 @@
 <div class="card">
-  <p-stepper [value]="currentStep">
-    <p-step-item [value]="1">
-      <p-step class="non-clickable">Krok 1</p-step>
-      <p-step-panel>
-        <ng-template #content>
-          <div class="min-h-48">
-            <div
-              class="content p-6">
-              <app-client-registration-step-details [form]="form"></app-client-registration-step-details>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <p-stepper [value]="currentStep">
+      <p-step-item [value]="1">
+        <p-step class="non-clickable">Krok 1</p-step>
+        <p-step-panel>
+          <ng-template #content>
+            <div class="min-h-48">
+              <div
+                class="content p-6">
+                <app-client-registration-step-details [form]="form"></app-client-registration-step-details>
+              </div>
             </div>
-          </div>
-          <div class="py-6">
-            <p-button label="Dalej" type="button" (onClick)="onValidateFormAndMoveToNextStep()"/>
-          </div>
-        </ng-template>
-      </p-step-panel>
-    </p-step-item>
-    <p-step-item [value]="2">
-      <p-step class="non-clickable">Krok 2</p-step>
-      <p-step-panel>
-        <ng-template #content>
-          <div class="flex flex-col h-48">
-            <div
-              class="content">
-              <app-client-registration-step-consents></app-client-registration-step-consents>
+            <div class="py-6">
+              <p-button label="Dalej" type="button" (onClick)="onValidateFormAndMoveToNextStep()"/>
             </div>
-          </div>
-          <div class="flex py-6 gap-2">
-            <p-button label="Wstecz" severity="secondary" (onClick)="onGoBack()"/>
-            <p-button label="Zapisz" (onClick)="onSave()"/>
-          </div>
-        </ng-template>
-      </p-step-panel>
-    </p-step-item>
-  </p-stepper>
+          </ng-template>
+        </p-step-panel>
+      </p-step-item>
+      <p-step-item [value]="2">
+        <p-step class="non-clickable">Krok 2</p-step>
+        <p-step-panel>
+          <ng-template #content>
+            <div class="flex flex-col min-h-48">
+              <div
+                class="content p-6">
+                <app-client-registration-step-consents [form]="form"></app-client-registration-step-consents>
+              </div>
+            </div>
+            <div class="flex py-6 gap-2">
+              <p-button label="Wstecz" severity="secondary" (onClick)="onGoBack()"/>
+              <p-button label="Zapisz" type="submit"/>
+            </div>
+          </ng-template>
+        </p-step-panel>
+      </p-step-item>
+    </p-stepper>
+  </form>
 </div>

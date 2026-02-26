@@ -1,7 +1,8 @@
 <div class="card">
   @let formGroup = form();
-  <form [formGroup]="formGroup">
-    <div class="h-full flex flex-col justify-center">
+  @let detailsStepFormGroup = formGroup.controls['detailsStep'];
+  @if (detailsStepFormGroup) {
+    <div [formGroup]="detailsStepFormGroup" class="h-full flex flex-col justify-center">
       <div>
         <label for="type" class="mr-4">Typ klienta:</label>
         <p-select id="type" formControlName="type" [options]="[ClientType.PERSON, ClientType.COMPANY]"
@@ -9,20 +10,20 @@
                   class="w-40 mb-5"/>
       </div>
       <div class="flex flex-col md:flex-row w-full gap-0 md:gap-6">
-        @if (formGroup.controls['type'].value === ClientType.PERSON) {
+        @if (detailsStepFormGroup.controls['type'].value === ClientType.PERSON) {
           <div class="grow">
             <p-floatlabel variant="on" class="block md:max-w-100 min-w-40">
               <input formControlName="name" pInputText id="name" autocomplete="off" class="w-full"/>
               <label for="name">Imię</label>
             </p-floatlabel>
-            <app-form-error [control]="form().controls['name']"></app-form-error>
+            <app-form-error [control]="detailsStepFormGroup.controls['name']"></app-form-error>
           </div>
           <div class="grow">
             <p-floatlabel variant="on" class="block md:max-w-100 min-w-40">
               <input formControlName="surname" pInputText id="surname" autocomplete="off" class="w-full"/>
               <label for="surname">Nazwisko</label>
             </p-floatlabel>
-            <app-form-error [control]="form().controls['surname']"></app-form-error>
+            <app-form-error [control]="detailsStepFormGroup.controls['surname']"></app-form-error>
           </div>
 
         } @else {
@@ -31,14 +32,14 @@
               <input formControlName="companyName" pInputText id="companyName" autocomplete="off" class="w-full"/>
               <label for="companyName">Nazwa firmy</label>
             </p-floatlabel>
-            <app-form-error [control]="form().controls['companyName']"></app-form-error>
+            <app-form-error [control]="detailsStepFormGroup.controls['companyName']"></app-form-error>
           </div>
           <div class="grow">
             <p-floatlabel variant="on" class="block md:max-w-100 min-w-40">
               <input formControlName="nip" pInputText id="nip" autocomplete="off" class="w-full"/>
               <label for="nip">NIP</label>
             </p-floatlabel>
-            <app-form-error [control]="form().controls['nip']"></app-form-error>
+            <app-form-error [control]="detailsStepFormGroup.controls['nip']"></app-form-error>
           </div>
         }
       </div>
@@ -47,8 +48,8 @@
           <input formControlName="email" pInputText id="email" autocomplete="off" class="w-full"/>
           <label for="email">Email</label>
         </p-floatlabel>
-        <app-form-error [control]="form().controls['email']"></app-form-error>
+        <app-form-error [control]="detailsStepFormGroup.controls['email']"></app-form-error>
       </div>
     </div>
-  </form>
+  }
 </div>

@@ -4,6 +4,7 @@ import { StepperModule } from 'primeng/stepper';
 import { ClientRegistrationStepDetails } from './steps/client-registration-step-details/client-registration-step-details';
 import { ClientRegistrationStepConsents } from './steps/client-registration-step-consents/client-registration-step-consents';
 import { ClientRegistrationForm } from '../../services/client-registration-form';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-client-registration-page',
@@ -12,6 +13,8 @@ import { ClientRegistrationForm } from '../../services/client-registration-form'
     StepperModule,
     ClientRegistrationStepDetails,
     ClientRegistrationStepConsents,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './client-registration-page.html',
   styleUrl: './client-registration-page.css',
@@ -24,8 +27,12 @@ export class ClientRegistrationPage {
   protected readonly form = this.clientRegistrationForm.form;
   protected currentStep: number = 2;
 
-  protected onSave() {
-    console.log('saved');
+  protected onSubmit() {
+    this.form.markAllAsTouched();
+    this.form.updateValueAndValidity();
+    if (this.form.valid) {
+      console.log('saved', this.form.getRawValue());
+    }
   }
 
   protected onValidateFormAndMoveToNextStep(): void {
@@ -40,9 +47,5 @@ export class ClientRegistrationPage {
 
   protected onGoBack(): void {
     this.currentStep = 1;
-  }
-
-  private validateConsents() {
-    //todo
   }
 }

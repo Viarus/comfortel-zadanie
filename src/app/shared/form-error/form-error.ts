@@ -9,7 +9,7 @@ import { hidden } from '@angular/forms/signals';
   styleUrl: './form-error.css',
 })
 export class FormError {
-  control = input.required<AbstractControl>();
+  control = input.required<AbstractControl | undefined>();
 
   get show(): boolean {
     const c = this.control();
