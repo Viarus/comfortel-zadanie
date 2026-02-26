@@ -1,7 +1,7 @@
 <div class="card">
   <p-stepper [value]="currentStep">
     <p-step-item [value]="1">
-      <p-step>Krok 1</p-step>
+      <p-step class="non-clickable">Krok 1</p-step>
       <p-step-panel>
         <ng-template #content>
           <div class="flex flex-col h-48">
@@ -17,7 +17,7 @@
       </p-step-panel>
     </p-step-item>
     <p-step-item [value]="2">
-      <p-step>Krok 2</p-step>
+      <p-step class="non-clickable">Krok 2</p-step>
       <p-step-panel>
         <ng-template #content>
           <div class="flex flex-col h-48">
