@@ -28,11 +28,18 @@ export class ClientRegistrationPage {
     console.log('saved');
   }
 
-  protected validateFormAndMoveToNextStep(): void {
+  protected onValidateFormAndMoveToNextStep(): void {
+    console.log(this.currentStep);
     this.clientRegistrationForm.validateForm();
     if (this.form.valid) {
       this.currentStep = 2;
+    } else {
+      console.log(this.form);
     }
+  }
+
+  protected onGoBack(): void {
+    this.currentStep = 1;
   }
 
   private validateConsents() {
