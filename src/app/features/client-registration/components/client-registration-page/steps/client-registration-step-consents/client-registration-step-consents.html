@@ -7,20 +7,26 @@
         <div class="flex flex-col gap-4">
           @for (consent of consents; track $index) {
             @let controlId = 'consent-checkbox-' + consent.id;
-            <div class="flex flex-col mb-2">
+            <div class="flex flex-col">
               <div class="flex items-center text-xl mb-1">
                 <p-checkbox [inputId]="controlId" [binary]="true" [formControlName]="$index"/>
                 <label [for]="controlId" class="ml-2">
                   {{ consent.title }}
-                  @if (consent.required) {*}
+                  @if (consent.required) {
+                    *
+                  }
                 </label>
               </div>
-              <p class="text-sm">{{consent.description}}</p>
+              <div>
+                <p class="text-sm">{{ consent.description }}</p>
+                <app-form-error [control]="detailsStepFormGroup.controls['consents'].controls[$index]"></app-form-error>
+              </div>
             </div>
           }
         </div>
       </div>
-
+      @let remainingConsents = remainingConsents$ | async;
+      <p [class.invisible]="!remainingConsents || remainingConsents < 1"> Pozostałe zgody: {{ remainingConsents }}</p>
     </div>
   }
 } @else {

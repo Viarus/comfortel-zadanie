@@ -1,6 +1,5 @@
 import { Component, input } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { hidden } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-form-error',
@@ -26,8 +25,7 @@ export class FormError {
     if (errors['email']) return 'Podaj poprawny adres email.';
     if (errors['minlength']) return `Niepoprawna długość.`;
     if (errors['pattern']) return 'Niepoprawny format.';
+    if (errors['requiredTrue']) return 'Zgoda wymagana.';
     return 'Pole jest niepoprawne.';
   }
-
-  protected readonly hidden = hidden;
 }

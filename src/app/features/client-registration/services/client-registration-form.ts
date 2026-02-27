@@ -71,8 +71,8 @@ export class ClientRegistrationForm {
       detailsStep.get(controlName)?.updateValueAndValidity({ emitEvent: false, onlySelf: true });
     });
 
-    this.form.markAllAsTouched();
-    this.form.updateValueAndValidity();
+    detailsStep.markAllAsTouched();
+    detailsStep.updateValueAndValidity();
   }
 
   buildConsentsFromDto(consents: ConsentDto[]) {

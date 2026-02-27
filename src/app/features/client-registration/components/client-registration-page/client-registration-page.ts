@@ -25,20 +25,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class ClientRegistrationPage {
   private readonly clientRegistrationForm: ClientRegistrationForm = inject(ClientRegistrationForm);
   protected readonly form = this.clientRegistrationForm.form;
-  protected currentStep: number = 2;
+  protected currentStep: number = 1;
+  protected viewFormJSON: unknown;
 
   protected onSubmit() {
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
     if (this.form.valid) {
-      console.log('saved', this.form.getRawValue());
+      const raw = this.form.getRawValue();
+      console.log('saved', raw);
+      this.viewFormJSON = JSON.stringify(raw);
     }
   }
 
   protected onValidateFormAndMoveToNextStep(): void {
-    console.log(this.currentStep);
     this.clientRegistrationForm.validateForm();
-    if (this.form.valid) {
+    if (this.form.get('detailsStep')?.valid) {
       this.currentStep = 2;
     } else {
       console.log(this.form);
